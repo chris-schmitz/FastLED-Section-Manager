@@ -1,0 +1,56 @@
+# Strip Section Manager
+
+## Overview
+
+The Strip Section Manager is a set of tools used to augment "sections" of an LED strip so that rows of a given "section" are treated like a single row of a normal LED strip. 
+
+E.g. 
+
+If a normal led strip had 20 leds in it and you considered 5 leds a section:
+
+```
+----- ----- ----- -----
+```
+
+The Section Manager could allow you to do something like make the middle "section" two rows:
+
+```
+----- ----- -----
+      -----
+```
+
+And the two rows would be treated as one regular section. 
+
+You could then send a single red led animation across the strip like so:
+
+TODO: add demo code once the classes are fully fleshed out
+```c++
+#define TOTAL_LEDS 20
+CRGB leds[TOTAL_LEDS]
+SectionManager sectionManager = SectionManager(leds, TOTAL_LEDS);
+
+sectionManager.addSection(PixelRange(1, 0, 4));
+sectionManager.addSection(PixelRange(2, 5, 14));
+sectionManager.addSection(PixelRange(1, 15, 19));
+
+
+for (int i = 0; i < sectionManager.stripLength; i++) {
+  sectionManager.setPixelColor(i, 0xFF0000, true);
+  sectionManager.setPixelColor(i-1, 0x000000, true);
+}
+```
+
+The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
+
+
+## Assumptions and restrictions
+
+Note that I'm developing this for a very specific light that has constraints that a more elaborate light wouldn't have. Also note that I'm not thinking of this light as a custom shaped matrix, this is specifically thinking of the strip still as a strip, just one that can get wider than a single line at points. 
+
+Because of that and because I'm trying to keep it simple so I can finish the actual project there are some assumptions and restrictions:
+
+- Each row in a section starts at the same point
+  - i.e. the starting point of a row can't be offset from another. That's possible, but it's outside of the scope of my current needs
+- Each row in a given section has the exact same number of LEDs
+  - Again, this is per the scope of my current project, the manager could be augmented to account for this as well, but keeping things simple and in scope
+
