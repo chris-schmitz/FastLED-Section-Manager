@@ -1,6 +1,11 @@
 #pragma once
 #include <cstdint>
 
+enum ExceptionCodes
+{
+  INDEX_OUT_OF_RANGE
+};
+
 class PixelRange
 {
 public:
@@ -9,14 +14,17 @@ public:
     _iterateInReverse = false;
     _iteratorIndex = 0;
   }
-  PixelRange(int rows, int startingIndex, int endingIndex);
+  PixelRange(int startingIndex, int endingIndex);
+  // TODO ripout
+  // PixelRange(int rows, int startingIndex, int endingIndex);
 
   void resetIterator();
   void setReverseIteration(bool reverse);
   uint8_t getNextIndex();
   uint8_t getCurrentIndex();
+  uint8_t getTotalPixels();
 
-  int getRowCount();
+  // int getRowCount();
   int getStart();
   int getEnd();
 
@@ -26,7 +34,7 @@ private:
   int _rowCount;
   int _start;
   int _end;
-  int _indexSpacing;
+  // int _indexSpacing;
 
   void setIteratorIndex(uint8_t index);
   uint8_t forwardIteration();
