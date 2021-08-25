@@ -110,3 +110,22 @@ uint8_t PixelRange::getTotalPixels()
 {
   return _end - _start + 1; // * +1 to convert from base 0 to base 1
 }
+
+int PixelRange::getIndexAtLevel(int level)
+{
+  if (level < getTotalPixels())
+  {
+    return getIndexAtLevelAccordingToIterationDirection(level);
+  }
+
+  throw INDEX_OUT_OF_RANGE;
+}
+
+int PixelRange::getIndexAtLevelAccordingToIterationDirection(int level)
+{
+  if (_iterateInReverse)
+  {
+    return _end - level;
+  }
+  return _start + level;
+}

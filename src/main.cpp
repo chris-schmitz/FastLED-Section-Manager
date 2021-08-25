@@ -12,13 +12,29 @@ int main()
 
   Section s = Section(strip, TOTAL_LEDS);
 
+  PixelRange r2 = PixelRange(10, 12);
+  r2.setReverseIteration(true);
+
   s.addPixelRange(PixelRange(0, 9));
+  // s.addPixelRange(r2);
   s.addPixelRange(PixelRange(10, 19));
   s.addPixelRange(PixelRange(20, 29));
 
+  // * all at once
   // s.fillSectionWithSingleColor(0x010101, FillStyle(ALL_AT_ONCE));
-  s.fillSectionWithSingleColor(0x010203, FillStyle(ALL_AT_ONCE));
 
+  // * one at a time
+  // s.fillSectionWithSingleColor(0x010203, FillStyle(ONE_AT_A_TIME, 10));
+
+  for (uint8_t i = 0; i < s.getTotalLevels(); i++)
+  {
+    s.setLevelColor(i, 0x010203);
+    // s.show();
+  }
+
+  // s.fillSectionWithGradient(0x000000, )
+
+  // ^ Test - get led values
   for (int i = 0; i < TOTAL_LEDS; i++)
   {
     cout << (char)(0x31 + strip[i].r) << ", "

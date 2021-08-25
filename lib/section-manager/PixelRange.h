@@ -24,6 +24,8 @@ public:
   uint8_t getCurrentIndex();
   uint8_t getTotalPixels();
 
+  int getIndexAtLevel(int level);
+
   // int getRowCount();
   int getStart();
   int getEnd();
@@ -39,4 +41,7 @@ private:
   void setIteratorIndex(uint8_t index);
   uint8_t forwardIteration();
   uint8_t reverseIteration();
+
+  // TODO: rename
+  int getIndexAtLevelAccordingToIterationDirection(int level);
 };

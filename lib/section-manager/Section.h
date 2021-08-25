@@ -67,6 +67,8 @@ enum FillType
   ONE_AT_A_TIME
 };
 
+// TODO: consider
+// ? do we like this OO approach? if we do, is this the right shape??
 struct FillStyle
 {
   FillType type;
@@ -96,9 +98,13 @@ public:
   };
 
   int getTotalLeds();
+  int getTotalRanges();
+  int getTotalLevels();
+
   void addPixelRange(PixelRange range);
   PixelRange getPixelRange(int index);
-  int getTotalRanges();
+
+  void setLevelColor(int levelIndex, uint32_t color);
 
   void fillSectionWithSingleColor(uint32_t color, FillStyle style);
   void fillSectionWithGradient(uint32_t color, FillStyle style);
