@@ -7,18 +7,13 @@ void Section::addPixelRange(PixelRange range)
   {
     _pixelRanges[_totalRanges] = range;
     _totalRanges++;
-    updateLongestRange(range.getTotalPixels());
+    updateLongestRange(range.getTotalIndexes());
   }
 }
 
 PixelRange Section::getPixelRange(int index)
 {
   return _pixelRanges[index];
-}
-
-int Section::getTotalLeds()
-{
-  return _totalLeds;
 }
 
 int Section::getTotalLevels()
@@ -28,7 +23,7 @@ int Section::getTotalLevels()
 
 void Section::fillSectionWithSingleColor(uint32_t color, FillStyle style)
 {
-  for (int level = 0; level < _totalLevelsInSection; level++)
+  for (int level = 0; level <= _totalLevelsInSection; level++)
   {
     // TODO: ripout test logs
     // std::cout << std::endl;
@@ -37,7 +32,6 @@ void Section::fillSectionWithSingleColor(uint32_t color, FillStyle style)
       try
       {
         int index = _pixelRanges[pixelRangeIndex].getIndexAtLevel(level);
-        // int index = _pixelRanges[pixelRangeIndex].getNextIndex();
 
         // TODO: ripout test logs
         std::cout << "pixelRangeIndex: " << pixelRangeIndex;
@@ -78,11 +72,11 @@ int Section::getTotalRanges()
   return _totalRanges;
 }
 
-void Section::updateLongestRange(uint8_t pixelCount)
+void Section::updateLongestRange(uint8_t numberOfIndexesInRange)
 {
-  if (pixelCount > _totalLevelsInSection)
+  if (numberOfIndexesInRange > _totalLevelsInSection)
   {
-    _totalLevelsInSection = pixelCount;
+    _totalLevelsInSection = numberOfIndexesInRange;
   }
 }
 

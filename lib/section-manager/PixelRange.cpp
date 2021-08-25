@@ -20,11 +20,6 @@ void PixelRange::setReverseIteration(bool reverse)
   _iterateInReverse = reverse;
 }
 
-uint8_t PixelRange::getTotalPixels()
-{
-  return _end - _start + 1; // * +1 to convert from base 0 to base 1
-}
-
 uint8_t PixelRange::getTotalIndexes()
 {
   return _end - _start;
@@ -32,7 +27,7 @@ uint8_t PixelRange::getTotalIndexes()
 
 int PixelRange::getIndexAtLevel(int level)
 {
-  if (level < getTotalPixels())
+  if (level <= getTotalIndexes())
   {
     return getIndexAtLevelAccordingToIterationDirection(level);
   }

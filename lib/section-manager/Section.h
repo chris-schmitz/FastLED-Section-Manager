@@ -92,13 +92,17 @@ public:
   {
     initialize();
   };
-  Section(CRGB *leds, int totalLeds) : _totalLeds(totalLeds), _leds(leds)
+  Section(CRGB *leds) : _leds(leds)
   {
     initialize();
   };
 
-  int getTotalLeds();
   int getTotalRanges();
+  // TODO: consider reactor
+  // * getTotalLevels is referrings to the count of levels which is a 1 based concept, but we access the levels
+  // * via a 0 based index. This approach works ane makes sense, but the DX feels awkward. Consider:
+  // ^ - change the name to refer to a "highest Index" so that devs can use a (i = 0; i < highestIndex; i++) approach
+  // ^ - update documentation to say "iteration needs to happen with a 1 based range"
   int getTotalLevels();
 
   void addPixelRange(PixelRange range);
@@ -110,7 +114,6 @@ public:
   void fillSectionWithGradient(uint32_t color, FillStyle style);
 
 private:
-  int _totalLeds;
   int _totalRanges;
   int _totalLevelsInSection;
   CRGB *_leds;

@@ -10,7 +10,7 @@ CRGB strip[TOTAL_LEDS];
 int main()
 {
 
-  Section s = Section(strip, TOTAL_LEDS);
+  Section s = Section(strip);
 
   PixelRange r2 = PixelRange(10, 19);
   r2.setReverseIteration(true);
@@ -26,7 +26,7 @@ int main()
   // * one at a time
   s.fillSectionWithSingleColor(0x010203, FillStyle(ONE_AT_A_TIME, 10));
 
-  for (uint8_t i = 0; i < s.getTotalLevels(); i++)
+  for (uint8_t i = 0; i <= s.getTotalLevels(); i++)
   {
     s.setLevelColor(i, 0x010203);
     // s.show();
