@@ -112,17 +112,15 @@ public:
 private:
   int _totalLeds;
   int _totalRanges;
-  int _longestRangeLength;
+  int _totalLevelsInSection;
   CRGB *_leds;
   PixelRange _pixelRanges[SECTION_UPPER_LIMIT];
 
   void initialize()
   {
     _totalRanges = 0;
-    _longestRangeLength = 0;
+    _totalLevelsInSection = 0;
   }
-
-  void resetAllRanges(); // ? make this public??
 
   void updateLongestRange(uint8_t pixelCount);
 };
