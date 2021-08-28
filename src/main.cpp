@@ -22,21 +22,22 @@ void rainbow(Section *s, uint8_t pauseDuration);
 void addPixelRanges()
 {
   // ? so how do we organize this into a manager?
-  s1.addPixelRange(PixelRange(0, 3));
-  s2.addPixelRange(PixelRange(4, 7, true));
-  s3.addPixelRange(PixelRange(8, 11));
-  s4.addPixelRange(PixelRange(12, 15, true));
-  s5.addPixelRange(PixelRange(16, 19));
-  s6.addPixelRange(PixelRange(20, 23, true));
+  // ? or do we want to leave it unorganized like this?
+  s1.addPixelRange(0, 3);
+  s2.addPixelRange(4, 7, true);
+  s3.addPixelRange(8, 11);
+  s4.addPixelRange(12, 15, true);
+  s5.addPixelRange(16, 19);
+  s6.addPixelRange(20, 23, true);
 
-  s7.addPixelRange(PixelRange(24, 27));
-  s7.addPixelRange(PixelRange(28, 31, true));
+  s7.addPixelRange(24, 27);
+  s7.addPixelRange(28, 31, true);
 
-  s8.addPixelRange(PixelRange(32, 33));
-  s8.addPixelRange(PixelRange(34, 35, true));
+  s8.addPixelRange(32, 33);
+  s8.addPixelRange(34, 35, true);
 
-  s9.addPixelRange(PixelRange(36, 38));
-  s9.addPixelRange(PixelRange(39, 41, true));
+  s9.addPixelRange(36, 38);
+  s9.addPixelRange(39, 41, true);
 }
 
 void setup()

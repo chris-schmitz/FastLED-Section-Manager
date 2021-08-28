@@ -1,6 +1,17 @@
 #include "Section.h"
 #include <FastLED.h>
 
+void Section::addPixelRange(int startingIndex, int endingIndex)
+{
+  addPixelRange(PixelRange(startingIndex, endingIndex));
+}
+
+void Section::addPixelRange(int startingIndex, int endingIndex, bool reverse)
+{
+
+  addPixelRange(PixelRange(startingIndex, endingIndex, reverse));
+}
+
 void Section::addPixelRange(PixelRange range)
 {
   if (_totalRanges <= SECTION_UPPER_LIMIT)

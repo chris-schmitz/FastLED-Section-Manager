@@ -106,6 +106,8 @@ public:
   // ^ - update documentation to say "iteration needs to happen with a 1 based range"
   int getTotalLevels();
 
+  void addPixelRange(int startingIndex, int endingIndex);
+  void addPixelRange(int startingIndex, int endingIndex, bool reverse);
   void addPixelRange(PixelRange range);
   PixelRange getPixelRange(int index);
 
