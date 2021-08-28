@@ -14,6 +14,7 @@ public:
     _iterateInReverse = false;
   }
   PixelRange(int startingIndex, int endingIndex);
+  PixelRange(int startingIndex, int endingIndex, bool reverse);
 
   uint8_t getTotalIndexes();
   int getIndexAtLevel(int level);

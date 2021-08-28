@@ -80,6 +80,8 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "cinttypes": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "*.cpp_dis": "cpp",
+    "cerrno": "cpp"
   }
 }

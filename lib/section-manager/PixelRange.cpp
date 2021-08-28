@@ -4,7 +4,15 @@ PixelRange::PixelRange(int startingIndex, int endingIndex)
 {
   _start = startingIndex;
   _end = endingIndex;
-};
+  _iterateInReverse = false;
+}
+
+PixelRange::PixelRange(int startingIndex, int endingIndex, bool reverse)
+{
+  _start = startingIndex;
+  _end = endingIndex;
+  _iterateInReverse = reverse;
+}
 
 int PixelRange::getStart()
 {
