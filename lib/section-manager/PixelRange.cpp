@@ -39,8 +39,10 @@ int PixelRange::getIndexAtLevel(int level)
   {
     return getIndexAtLevelAccordingToIterationDirection(level);
   }
-
-  throw INDEX_OUT_OF_RANGE;
+  else
+  {
+    return -1;
+  }
 }
 
 int PixelRange::getIndexAtLevelAccordingToIterationDirection(int level)

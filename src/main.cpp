@@ -17,7 +17,9 @@ Section s7 = Section(strip);
 Section s8 = Section(strip);
 Section s9 = Section(strip);
 
-void rainbow(Section *s, uint8_t pauseDuration);
+Section *sectionArray[9] = {&s1, &s2, &s3, &s4, &s5, &s6, &s7, &s8, &s9};
+
+void rainbow(uint8_t pauseDuration);
 
 void addPixelRanges()
 {
@@ -44,7 +46,7 @@ void setup()
 {
   addPixelRanges();
   FastLED.addLeds<NEOPIXEL, LED_PIN>(strip, TOTAL_LEDS);
-  Serial.begin(9600);
+  FastLED.clear(true);
 }
 
 void loop()
@@ -82,36 +84,33 @@ void loop()
   s5.fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
   s6.fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
 
-  s8.fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 500));
-  s9.fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 500));
-  s7.fillWithColor(0xFF00FF, FillStyle(ONE_AT_A_TIME, 500));
+  s8.fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
+  s9.fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 150));
+  s7.fillWithColor(0xFF00FF, FillStyle(ONE_AT_A_TIME, 150));
   delay(500);
   FastLED.clear(true);
 
-  // * fill level by level
-  // for (uint8_t i = 0; i <= s1.getTotalLevels(); i++)
-  // {
-  //   s1.setLevelColor(i, 0xFFFF00);
-  //   s1.show();
-  //   delay(100);
-  // }
-  // delay(500);
-
-  // rainbow(&s1, 10);
+  rainbow(10);
   delay(500);
+  FastLED.clear(true);
 }
 
-void rainbow(Section *s, uint8_t pauseDuration)
+void rainbow(uint8_t pauseDuration)
 {
   uint16_t level, wheelPosition;
 
   for (wheelPosition = 0; wheelPosition < 256; wheelPosition++)
   {
-    for (level = 0; level <= s->getTotalLevels(); level++)
+    for (level = 0; level < 4; level++)
     {
-      s->setLevelColor(level, Wheel(level + wheelPosition) & 255);
+
+      uint32_t color = Wheel((level * 20 + wheelPosition) & 255);
+      for (uint8_t i = 0; i < sizeof(sectionArray) / sizeof(sectionArray[0]); i++)
+      {
+        (*sectionArray[i]).setLevelColor(level, color);
+      }
+
+      delay(pauseDuration);
     }
-    s->show();
-    delay(pauseDuration);
   }
 }
