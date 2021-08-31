@@ -6,6 +6,8 @@ The Strip Section Manager is a set of tools used to augment "sections" of an LED
 
 E.g.
 
+<!-- TODO: replace with picture of actual wiring -->
+
 If a normal led strip had 20 leds in it and you considered 5 leds a section:
 
 ```
