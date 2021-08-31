@@ -8,7 +8,6 @@ void Section::addPixelRange(int startingIndex, int endingIndex)
 
 void Section::addPixelRange(int startingIndex, int endingIndex, bool reverse)
 {
-
   addPixelRange(PixelRange(startingIndex, endingIndex, reverse));
 }
 
@@ -18,11 +17,11 @@ void Section::addPixelRange(PixelRange range)
   {
     _pixelRanges[_totalRanges] = range;
     _totalRanges++;
-    updateLongestRange(range.getTotalIndexes());
+    _updateLongestRange(range.getTotalIndexes());
   }
 }
 
-PixelRange Section::getPixelRange(int index)
+PixelRange &Section::getPixelRange(int index)
 {
   return _pixelRanges[index];
 }
@@ -63,7 +62,7 @@ int Section::getTotalRanges()
   return _totalRanges;
 }
 
-void Section::updateLongestRange(uint8_t numberOfIndexesInRange)
+void Section::_updateLongestRange(uint8_t numberOfIndexesInRange)
 {
   if (numberOfIndexesInRange > _totalLevelsInSection)
   {

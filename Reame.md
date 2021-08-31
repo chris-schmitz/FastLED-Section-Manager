@@ -28,20 +28,31 @@ TODO: add demo code once the classes are fully fleshed out
 ```c++
 #define TOTAL_LEDS 20
 CRGB leds[TOTAL_LEDS]
-SectionManager sectionManager = SectionManager(leds, TOTAL_LEDS);
 
-sectionManager.addSection(PixelRange(1, 0, 4));
-sectionManager.addSection(PixelRange(2, 5, 14));
-sectionManager.addSection(PixelRange(1, 15, 19));
+SectionManager sectionManager = SectionManager(leds);
 
+sectionManager.addSections(3);
 
-for (int i = 0; i < sectionManager.stripLength; i++) {
-  sectionManager.setPixelColor(i, 0xFF0000, true);
-  sectionManager.setPixelColor(i-1, 0x000000, true);
-}
+sectionManager.getSection(0).addPixelRange(0, 4);
+sectionManager.getSection(1).addPixelRange(5, 9);
+sectionManager.getSection(1).addPixelRange(10, 14);
+sectionManager.getSection(2).addPixelRange(15, 19);
+
+sectionManager.getSection(0).fillWithColor(0xFF0000, FillStyle(ALL_AT_ONCE));
+//  Note that when we fill section 1, it fills all of the ranges at the same time
+sectionManager.getSection(1).fillWithColor(0x00FF00, FillStyle(ALL_AT_ONCE));
+sectionManager.getSection(2).fillWithColor(0x0000FF, FillStyle(ALL_AT_ONCE));
 ```
 
 The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
+
+## Fill Styles
+
+### All at once
+
+### One at a time
+
+### By "level"
 
 ## Assumptions and restrictions
 

@@ -37,7 +37,7 @@ int PixelRange::getIndexAtLevel(int level)
 {
   if (level <= getTotalIndexes())
   {
-    return getIndexAtLevelAccordingToIterationDirection(level);
+    return _getIndexAtLevelAccordingToIterationDirection(level);
   }
   else
   {
@@ -45,7 +45,7 @@ int PixelRange::getIndexAtLevel(int level)
   }
 }
 
-int PixelRange::getIndexAtLevelAccordingToIterationDirection(int level)
+int PixelRange::_getIndexAtLevelAccordingToIterationDirection(int level)
 {
   if (_iterateInReverse)
   {

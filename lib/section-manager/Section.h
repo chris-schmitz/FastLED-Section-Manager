@@ -37,11 +37,11 @@ class Section
 public:
   Section()
   {
-    initialize();
+    _initialize();
   };
   Section(CRGB *leds) : _leds(leds)
   {
-    initialize();
+    _initialize();
   };
 
   int getTotalRanges();
@@ -55,7 +55,7 @@ public:
   void addPixelRange(int startingIndex, int endingIndex);
   void addPixelRange(int startingIndex, int endingIndex, bool reverse);
   void addPixelRange(PixelRange range);
-  PixelRange getPixelRange(int index);
+  PixelRange &getPixelRange(int index);
 
   void setLevelColor(int levelIndex, uint32_t color);
 
@@ -70,11 +70,11 @@ private:
   CRGB *_leds;
   PixelRange _pixelRanges[PIXEL_RANGE_UPPER_LIMIT];
 
-  void initialize()
+  void _initialize()
   {
     _totalRanges = 0;
     _totalLevelsInSection = 0;
   }
 
-  void updateLongestRange(uint8_t pixelCount);
+  void _updateLongestRange(uint8_t pixelCount);
 };

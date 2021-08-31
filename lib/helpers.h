@@ -14,7 +14,7 @@ uint32_t rgbToUint32(uint8_t r, uint8_t g, uint8_t b)
 
 uint32_t Wheel(uint8_t WheelPosition)
 {
-  WheelPosition = 255 - WheelPosition; // flip the number
+  WheelPosition = 255 - WheelPosition;
 
   if (WheelPosition < 85)
   {

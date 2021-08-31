@@ -1,11 +1,6 @@
 #pragma once
 #include <cstdint>
 
-enum ExceptionCodes
-{
-  INDEX_OUT_OF_RANGE
-};
-
 class PixelRange
 {
 public:
@@ -28,5 +23,5 @@ private:
   int _start;
   int _end;
 
-  int getIndexAtLevelAccordingToIterationDirection(int level);
+  int _getIndexAtLevelAccordingToIterationDirection(int level);
 };
