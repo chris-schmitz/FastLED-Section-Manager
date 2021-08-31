@@ -46,6 +46,8 @@ sectionManager.getSection(2).fillWithColor(0x0000FF, FillStyle(ALL_AT_ONCE));
 
 The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
 
+<!-- TODO: fill in details including animated gifs -->
+
 ## Fill Styles
 
 ### All at once
