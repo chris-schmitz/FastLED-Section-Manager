@@ -83,6 +83,7 @@ Because of that and because I'm trying to keep it simple so I can finish the act
 ## To Dos
 
 - Figure out a better name for the concept of "levels"
+- Add in index offsetting per range
 - Add in a way of iterating over all leds for all sections in a single loop
 
   - Like if you wanted to set each level one by one regardless of sections (but still applying section logic)
