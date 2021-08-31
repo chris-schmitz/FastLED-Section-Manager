@@ -75,3 +75,20 @@ Because of that and because I'm trying to keep it simple so I can finish the act
   - How do we handle "ok" out of bounds access? (right now we pass back a -1 index, but is that the best way of handling it?!)
   - How do we message back to the dev when an exceptional situation happens?
     - For this we could write a logger class that uses `Serial` to report back and inject that as a dependency so that the classes don't need to be tied to arduino just for logging
+
+## To Dos
+
+- Figure out a better name for the concept of "levels"
+- Add in a way of iterating over all leds for all sections in a single loop
+
+  - Like if you wanted to set each level one by one regardless of sections (but still applying section logic)
+
+  ```c++
+    // something like this
+
+    for (int i = 0; i < sectionManager.totalLevels; i++){
+      sectionManager.setGlobalLevel(i, 0xFF00FF);
+      sectionManager.show();
+      delay(100);
+    }
+  ```
