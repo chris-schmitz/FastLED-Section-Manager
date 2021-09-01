@@ -52,6 +52,19 @@ sectionManager.getSection(2).fillWithColor(0x0000FF, FillStyle(ALL_AT_ONCE));
 
 The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
 
+## Class Structure
+
+The classes in this library each group led index ranges in a hierarchy:
+
+![organization](./readme_attachments/organization_chart.png)
+
+- PixelRange is the primary grouping of led indexes and controls which direction the indexes are iterated over
+- Sections are groupings of pixel ranges. All Pixel Ranges within a section are treated if they are a single set of leds with each led set controlled as a "level"
+  - e.g. if you had 5 ranges in a Section, the led count in the longest range would determine the number of "levels" in the section
+  - Note that this concept will change a bit when base offset is introduced, then it will be the longest range + offset determining the number of levels
+- SectionManager holds the grouping of all Sections. This is really a convenience class for holding and accessing an array of Sections.
+  - You could do the same thing by creating your own array of Sections, the manager just makes iteration a bit cleaner.
+
 <!-- TODO: fill in details including animated gifs -->
 
 ## Fill Styles
@@ -79,6 +92,7 @@ Because of that and because I'm trying to keep it simple so I can finish the act
   - How do we handle "ok" out of bounds access? (right now we pass back a -1 index, but is that the best way of handling it?!)
   - How do we message back to the dev when an exceptional situation happens?
     - For this we could write a logger class that uses `Serial` to report back and inject that as a dependency so that the classes don't need to be tied to arduino just for logging
+- Ultimately, there's nothing functionality wise that ties this library to FastLED. The classes are really just a way of managing acess to consecutive IDs. I'm using FastLED for for a couple of projects so I just baked it in. That said, I think this library could be made to be more flexible by making Section an abstract class that enforces the core methods and subclassing a FastLEDSection implementation. That way you could create other versions like a NeoPixelSection version to work with adafruit's NeoPixel library.
 
 ## To Dos
 
