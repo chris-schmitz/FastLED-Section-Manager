@@ -111,3 +111,11 @@ Because of that and because I'm trying to keep it simple so I can finish the act
       delay(100);
     }
   ```
+
+## POCs
+
+While building this library out I broke out a couple of proof of concept builds to focus on certian concepts:
+
+- [Thinking through the concepts of Range and Section](https://onlinegdb.com/Q00n_FAbj4)
+- [Feeling out the concepts of Range, Section, and SectionManager together](https://onlinegdb.com/rtuAZQSD5)
+- [Figuring out how to loop over all section "levels" as if they're one combined LED strip](https://onlinegdb.com/kLJ8-M4by)
