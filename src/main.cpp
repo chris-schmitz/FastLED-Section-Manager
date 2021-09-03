@@ -10,7 +10,7 @@ CRGB strip[TOTAL_LEDS];
 
 SectionManager sectionManager = SectionManager(strip);
 
-void rainbow(uint8_t pauseDuration);
+void rainbowMiddleIn(uint8_t pauseDuration);
 
 void addSectionsAndRanges()
 {
@@ -93,12 +93,25 @@ void loop()
   delay(500);
   FastLED.clear(true);
 
-  rainbow(10);
+  rainbowMiddleIn(10);
   delay(500);
   FastLED.clear(true);
 }
 
-void rainbow(uint8_t pauseDuration)
+void rainbowAllSections()
+{
+
+  for (int i = 0; i < sectionManager.getTotalLevels(); i++)
+  {
+    int *indexes = sectionManager.getIndexesAtRelativeLevel(i);
+  }
+  // for (int i = 0; i < sectionManager.getTotalLevels(); i++)
+  // {
+  //   sectionManager.setColorAtRelativeLevel(i, 0xFF00FF, true);
+  // }
+}
+
+void rainbowMiddleIn(uint8_t pauseDuration)
 {
   uint16_t level, wheelPosition;
 

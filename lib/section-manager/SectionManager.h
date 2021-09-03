@@ -16,10 +16,17 @@ public:
   Section &getSection(int sectionIndex);
   int getTotalSections();
 
+  int getTotalLevels();
+
+  int *getIndexesAtRelativeLevel(int level);
+
 private:
   CRGB *_leds;
   uint8_t _totalSections;
   Section _sections[SECTION_UPPER_LIMIT];
+
+  int _relativeIteration_sectionIndex = 0;
+  int _relativeIteration_levelIndex = 0;
 
   void _initalize();
 };

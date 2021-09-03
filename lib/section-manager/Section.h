@@ -56,6 +56,9 @@ public:
   void addPixelRange(int startingIndex, int endingIndex, bool reverse);
   void addPixelRange(PixelRange range);
   PixelRange &getPixelRange(int index);
+  PixelRange *getPixelRanges();
+
+  int *getIndexesAtLevel(int level);
 
   void setLevelColor(int levelIndex, uint32_t color);
 

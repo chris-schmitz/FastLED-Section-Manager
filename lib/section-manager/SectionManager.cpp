@@ -27,3 +27,13 @@ int SectionManager::getTotalSections()
 {
   return _totalSections;
 }
+
+int SectionManager::getTotalLevels()
+{
+  int total = 0;
+  for (int i = 0; i < _totalSections; i++)
+  {
+    total += _sections[i].getTotalLevels();
+  }
+  return total;
+}

@@ -25,10 +25,26 @@ PixelRange &Section::getPixelRange(int index)
 {
   return _pixelRanges[index];
 }
+PixelRange *Section::getPixelRanges()
+{
+  return _pixelRanges;
+}
 
 int Section::getTotalLevels()
 {
   return _totalLevelsInSection;
+}
+
+// ? is this the proper way of passing back a pointer?
+int *Section::getIndexesAtLevel(int level)
+{
+  int indexes[getTotalRanges()];
+
+  for (int i = 0; i < getTotalRanges(); i++)
+  { //? <= ??
+    indexes[i] = _pixelRanges[i].getIndexAtLevel(level);
+  }
+  return indexes;
 }
 
 void Section::fillWithColor(uint32_t color, FillStyle style)
