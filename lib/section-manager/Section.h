@@ -6,7 +6,7 @@
 // * Used to set the array size for sections
 // ! it worth considering switching this out with a vector type (external libary)
 // ! or a linked list, but for the current use case a simple array is fine
-#define PIXEL_RANGE_UPPER_LIMIT 10
+#define TOTAL_RANGES 10
 
 enum FillType
 {
@@ -58,9 +58,12 @@ public:
   PixelRange &getPixelRange(int index);
   PixelRange *getPixelRanges();
 
-  int *getIndexesAtLevel(int level);
+  int getRangeCount();
+  int getLargestLevelCount();
 
-  void setLevelColor(int levelIndex, uint32_t color);
+  int *getIndexesAtLevel(int level); // ? keep?
+
+  void setColorAtLevel(int levelIndex, uint32_t color);
 
   void fillWithColor(uint32_t color, FillStyle style);
   void fillSectionWithGradient(uint32_t color, FillStyle style);
@@ -68,15 +71,15 @@ public:
   void show();
 
 private:
-  int _totalRanges;
-  int _totalLevelsInSection;
+  int _rangeCount;
+  int _largestLevelCount;
   CRGB *_leds;
-  PixelRange _pixelRanges[PIXEL_RANGE_UPPER_LIMIT];
+  PixelRange _pixelRanges[TOTAL_RANGES];
 
   void _initialize()
   {
-    _totalRanges = 0;
-    _totalLevelsInSection = 0;
+    _rangeCount = 0;
+    _largestLevelCount = 0;
   }
 
   void _updateLongestRange(uint8_t pixelCount);

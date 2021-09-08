@@ -13,11 +13,11 @@ void Section::addPixelRange(int startingIndex, int endingIndex, bool reverse)
 
 void Section::addPixelRange(PixelRange range)
 {
-  if (_totalRanges <= PIXEL_RANGE_UPPER_LIMIT)
+  if (_rangeCount <= TOTAL_RANGES)
   {
-    _pixelRanges[_totalRanges] = range;
-    _totalRanges++;
-    _updateLongestRange(range.getTotalIndexes());
+    _pixelRanges[_rangeCount] = range;
+    _rangeCount++;
+    _updateLongestRange(range.getTotalLevels());
   }
 }
 
@@ -30,9 +30,19 @@ PixelRange *Section::getPixelRanges()
   return _pixelRanges;
 }
 
+int Section::getRangeCount()
+{
+  return _rangeCount;
+}
+
+int Section::getLargestLevelCount()
+{
+  return _largestLevelCount;
+}
+
 int Section::getTotalLevels()
 {
-  return _totalLevelsInSection;
+  return _largestLevelCount;
 }
 
 // ? is this the proper way of passing back a pointer?
@@ -49,7 +59,7 @@ int *Section::getIndexesAtLevel(int level)
 
 void Section::fillWithColor(uint32_t color, FillStyle style)
 {
-  for (int level = 0; level <= _totalLevelsInSection; level++)
+  for (int level = 0; level <= _largestLevelCount; level++)
   {
     for (int pixelRangeIndex = 0; pixelRangeIndex < getTotalRanges(); pixelRangeIndex++)
     {
@@ -75,18 +85,18 @@ void Section::fillWithColor(uint32_t color, FillStyle style)
 
 int Section::getTotalRanges()
 {
-  return _totalRanges;
+  return _rangeCount;
 }
 
-void Section::_updateLongestRange(uint8_t numberOfIndexesInRange)
+void Section::_updateLongestRange(uint8_t levelCount)
 {
-  if (numberOfIndexesInRange > _totalLevelsInSection)
+  if (levelCount > _largestLevelCount)
   {
-    _totalLevelsInSection = numberOfIndexesInRange;
+    _largestLevelCount = levelCount;
   }
 }
 
-void Section::setLevelColor(int levelIndex, uint32_t color)
+void Section::setColorAtLevel(int levelIndex, uint32_t color)
 {
   for (int pixelRangeIndex = 0; pixelRangeIndex < getTotalRanges(); pixelRangeIndex++)
   {

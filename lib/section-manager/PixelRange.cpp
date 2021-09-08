@@ -33,11 +33,16 @@ uint8_t PixelRange::getTotalIndexes()
   return _end - _start;
 }
 
+uint8_t PixelRange::getTotalLevels()
+{
+  return getTotalIndexes() + 1; // * convert from base 0 index to base 1 levels
+}
+
 int PixelRange::getIndexAtLevel(int level)
 {
   if (level <= getTotalIndexes())
   {
-    return _getIndexAtLevelAccordingToIterationDirection(level);
+    return _getIndexAtLevel(level);
   }
   else
   {
@@ -45,11 +50,17 @@ int PixelRange::getIndexAtLevel(int level)
   }
 }
 
-int PixelRange::_getIndexAtLevelAccordingToIterationDirection(int level)
+int PixelRange::_getIndexAtLevel(int level)
 {
+  if (level > getTotalIndexes())
+  {
+    return -1;
+  }
+
   if (_iterateInReverse)
   {
     return _end - level;
   }
+
   return _start + level;
 }

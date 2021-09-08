@@ -20,23 +20,23 @@ void addSectionsAndRanges()
   // * and whether the range should iterate forward or in reverse.
   // * Assuming you're wiring the strip in a zig zag pattern you'll
   // * want to flip the direction on every other row with the third boolean argument
-  sectionManager.getSection(0).addPixelRange(0, 3, true);
-  sectionManager.getSection(1).addPixelRange(4, 7, false); // * you can explicitly tell the range not to reverse if you'd like
-  sectionManager.getSection(2).addPixelRange(8, 11, true);
-  sectionManager.getSection(3).addPixelRange(12, 15);
-  sectionManager.getSection(4).addPixelRange(16, 19, true);
-  sectionManager.getSection(5).addPixelRange(20, 23);
+  sectionManager.addRangeToSection(0, 0, 3, true);
+  sectionManager.addRangeToSection(1, 4, 7, false); // * you can explicitly tell the range not to reverse if you'd like
+  sectionManager.addRangeToSection(2, 8, 11, true);
+  sectionManager.addRangeToSection(3, 12, 15);
+  sectionManager.addRangeToSection(4, 16, 19, true);
+  sectionManager.addRangeToSection(5, 20, 23);
 
   // * Notice that for sections of the light that are made of multiple
   // * rows of LEDs I'm adding a range per row
-  sectionManager.getSection(6).addPixelRange(24, 27);
-  sectionManager.getSection(6).addPixelRange(28, 31, true);
+  sectionManager.addRangeToSection(6, 24, 27);
+  sectionManager.addRangeToSection(6, 28, 31, true);
 
-  sectionManager.getSection(7).addPixelRange(32, 33);
-  sectionManager.getSection(7).addPixelRange(34, 35, true);
+  sectionManager.addRangeToSection(7, 32, 33);
+  sectionManager.addRangeToSection(7, 34, 35, true);
 
-  sectionManager.getSection(8).addPixelRange(36, 38);
-  sectionManager.getSection(8).addPixelRange(39, 41, true);
+  sectionManager.addRangeToSection(8, 36, 38);
+  sectionManager.addRangeToSection(8, 39, 41, true);
 }
 
 void setup()
@@ -55,6 +55,18 @@ void setup()
 
 void loop()
 {
+  rainbowAllSections(50);
+  delay(1000);
+
+  for (int i = 0; i < sectionManager.getTotalLevels(); i++)
+  {
+    sectionManager.setColorAtGlobalIndex(i, 0xFF00FF);
+    FastLED.show();
+    delay(200);
+  }
+  delay(1000);
+  FastLED.clear(true);
+
   // * all at once
   sectionManager.getSection(0).fillWithColor(0x51F0FF, FillStyle(ALL_AT_ONCE));
   delay(100);
@@ -98,17 +110,24 @@ void loop()
   FastLED.clear(true);
 }
 
-void rainbowAllSections()
+void rainbowAllSections(uint8_t pauseDuration)
 {
+  uint16_t level, wheelPosition;
 
-  for (int i = 0; i < sectionManager.getTotalLevels(); i++)
+  for (wheelPosition = 0; wheelPosition < 256; wheelPosition++)
   {
-    int *indexes = sectionManager.getIndexesAtRelativeLevel(i);
+    for (level = 0; level < sectionManager.getTotalLevels(); level++)
+    {
+      uint32_t color = Wheel((level * 20 + wheelPosition) & 255);
+
+      for (uint8_t i = 0; i < sectionManager.getSectionCount(); i++)
+      {
+        sectionManager.setColorAtGlobalIndex(level, color);
+      }
+
+      delay(pauseDuration);
+    }
   }
-  // for (int i = 0; i < sectionManager.getTotalLevels(); i++)
-  // {
-  //   sectionManager.setColorAtRelativeLevel(i, 0xFF00FF, true);
-  // }
 }
 
 void rainbowMiddleIn(uint8_t pauseDuration)
@@ -121,9 +140,9 @@ void rainbowMiddleIn(uint8_t pauseDuration)
     {
 
       uint32_t color = Wheel((level * 20 + wheelPosition) & 255);
-      for (uint8_t i = 0; i < sectionManager.getTotalSections(); i++)
+      for (uint8_t i = 0; i < sectionManager.getSectionCount(); i++)
       {
-        sectionManager.getSection(i).setLevelColor(level, color);
+        sectionManager.getSection(i).setColorAtLevel(level, color);
       }
 
       delay(pauseDuration);

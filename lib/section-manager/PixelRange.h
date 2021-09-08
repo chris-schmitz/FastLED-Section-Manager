@@ -12,6 +12,8 @@ public:
   PixelRange(int startingIndex, int endingIndex, bool reverse);
 
   uint8_t getTotalIndexes();
+  uint8_t getTotalLevels();
+
   int getIndexAtLevel(int level);
   int getStart();
   int getEnd();
@@ -23,5 +25,5 @@ private:
   int _start;
   int _end;
 
-  int _getIndexAtLevelAccordingToIterationDirection(int level);
+  int _getIndexAtLevel(int level);
 };
