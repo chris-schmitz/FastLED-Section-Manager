@@ -29,26 +29,36 @@ You could then send a single red led animation across the strip like so:
 TODO: add demo code once the classes are fully fleshed out
 
 ```c++
+#define LED_PIN 3
 #define TOTAL_LEDS 20
-CRGB leds[TOTAL_LEDS]
+
+CRGB leds[TOTAL_LEDS];
 
 SectionManager sectionManager = SectionManager(leds);
 
-sectionManager.addSections(3);
+void setup() {
+  FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, TOTAL_LEDS);
 
-sectionManager.addRangeToSection(0, 0, 4);
-sectionManager.addRangeToSection(1, 5, 9);
-// Note that because the third led strip (the second range in the second section) is wired
-// in reverse according to the left to right direction of our strip we need to tell the
-// section manager to handle any iteration over this range in reverse. We can send in an
-// optional third boolean value to tell the manager to "reverse" the range.
-sectionManager.addRangeToSection(1, 10, 14, true);
-sectionManager.addRangeToSection(2, 15, 19);
+  // tell the sectionManager the number sections your light has
+  sectionManager.addSections(3);
 
-sectionManager.fillSectionWithColor(0,0xFF0000, FillStyle(ALL_AT_ONCE));
-//  Note that when we fill section 1, it fills all of the ranges at the same time
-sectionManager.fillSectionWithColor(1,0x00FF00, FillStyle(ALL_AT_ONCE));
-sectionManager.fillSectionWithColor(2,0x0000FF, FillStyle(ALL_AT_ONCE));
+  // Add the ranges of LED indexes that make up a given section
+  sectionManager.addRangeToSection(0, 0, 4);
+  sectionManager.addRangeToSection(1, 5, 9);
+  // Note that because the third led strip (the second range in the second section) is wired
+  // in reverse according to the left to right direction of our strip we need to tell the
+  // section manager to handle any iteration over this range in reverse. We can send in an
+  // optional third boolean value to tell the manager to "reverse" the range.
+  sectionManager.addRangeToSection(1, 10, 14, true);
+  sectionManager.addRangeToSection(2, 15, 19);
+
+  sectionManager.fillSectionWithColor(0,0xFF0000, FillStyle(ALL_AT_ONCE));
+  //  Note that when we fill section 1, it fills all of the ranges at the same time
+  sectionManager.fillSectionWithColor(1,0x00FF00, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(2,0x0000FF, FillStyle(ALL_AT_ONCE));
+
+}
+
 ```
 
 The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
