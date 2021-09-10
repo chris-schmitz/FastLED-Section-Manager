@@ -45,7 +45,6 @@ int Section::getTotalLevels()
   return _largestLevelCount;
 }
 
-// ? is this the proper way of passing back a pointer?
 int *Section::getIndexesAtLevel(int level)
 {
   int indexes[getTotalRanges()];

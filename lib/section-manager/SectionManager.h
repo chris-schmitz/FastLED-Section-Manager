@@ -15,20 +15,20 @@ public:
   void addSection(Section section); // ? keep? cut?
   void addSections(int sectionCount);
   Section &getSection(int sectionIndex);
-  int getSectionCount();
 
   void addRangeToSection(int sectionIndex, int rangeStart, int rangeEnd);
   void addRangeToSection(int sectionIndex, int rangeStart, int rangeEnd, bool reverseRange);
 
+  int getSectionCount();
   int getTotalLevels();
 
-  int *getIndexesAtRelativeLevel(int level);
-
   void setColorAtGlobalIndex(int globalIndex, uint32_t color);
+  void fillSectionWithColor(int sectionIndex, uint32_t color, FillStyle style);
 
 private:
   CRGB *_leds;
   uint8_t _sectionCount;
+  int _totalLevels;
   Section _sections[SECTION_UPPER_LIMIT];
   int _maxLevelPerSection[SECTION_UPPER_LIMIT];
 
@@ -37,4 +37,5 @@ private:
 
   void _initalize();
   Pair<int> _findSectionFromGlobalIndex(int globalIndex);
+  void _calculateTotalLevels();
 };

@@ -37,16 +37,22 @@ void SectionManager::addRangeToSection(int sectionIndex, int rangeStart, int ran
 {
   getSection(sectionIndex).addPixelRange(rangeStart, rangeEnd, reverseRange);
   _maxLevelPerSection[sectionIndex] = getSection(sectionIndex).getLargestLevelCount();
+  _calculateTotalLevels();
 }
 
 int SectionManager::getTotalLevels()
+{
+  return _totalLevels;
+}
+void SectionManager::_calculateTotalLevels()
 {
   int total = 0;
   for (int i = 0; i < SECTION_UPPER_LIMIT; i++)
   {
     total += _sections[i].getTotalLevels();
   }
-  return total;
+  _totalLevels = total;
+  // return total;
 }
 
 void SectionManager::setColorAtGlobalIndex(int globalIndex, uint32_t color)
@@ -74,4 +80,9 @@ Pair<int> SectionManager::_findSectionFromGlobalIndex(int globalIndex)
       return Pair<int>(i, accumulator - _maxLevelPerSection[i]);
     }
   }
+}
+
+void SectionManager::fillSectionWithColor(int sectionIndex, uint32_t color, FillStyle style)
+{
+  getSection(sectionIndex).fillWithColor(color, style);
 }

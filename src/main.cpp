@@ -65,50 +65,41 @@ void loop()
   delay(1000);
   FastLED.clear(true);
 
-  for (int i = 0; i < sectionManager.getTotalLevels(); i++)
-  {
-    sectionManager.setColorAtGlobalIndex(i, 0xFF00FF);
-    FastLED.show();
-    delay(200);
-  }
-  delay(1000);
-  FastLED.clear(true);
-
   // * all at once
-  sectionManager.getSection(0).fillWithColor(0x51F0FF, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(0, 0x51F0FF, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(1).fillWithColor(0x51F0AA, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(1, 0x51F0AA, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(2).fillWithColor(0x51F0BB, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(2, 0x51F0BB, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(3).fillWithColor(0x51F0CC, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(3, 0x51F0CC, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(4).fillWithColor(0x51F0DD, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(4, 0x51F0DD, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(5).fillWithColor(0x51F0EE, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(5, 0x51F0EE, FillStyle(ALL_AT_ONCE));
   delay(100);
 
-  sectionManager.getSection(6).fillWithColor(0xFF00FF, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(6, 0xFF00FF, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(7).fillWithColor(0xFFFF00, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(7, 0xFFFF00, FillStyle(ALL_AT_ONCE));
   delay(100);
-  sectionManager.getSection(8).fillWithColor(0x00FFFF, FillStyle(ALL_AT_ONCE));
+  sectionManager.fillSectionWithColor(8, 0x00FFFF, FillStyle(ALL_AT_ONCE));
   delay(500);
 
   FastLED.clear(true);
   delay(500);
 
   // * one at a time
-  sectionManager.getSection(0).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
-  sectionManager.getSection(1).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
-  sectionManager.getSection(2).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
-  sectionManager.getSection(3).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
-  sectionManager.getSection(4).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
-  sectionManager.getSection(5).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(0, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(1, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(2, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(3, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(4, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+  sectionManager.fillSectionWithColor(5, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
 
-  sectionManager.getSection(6).fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
-  sectionManager.getSection(7).fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
-  sectionManager.getSection(8).fillWithColor(0xFF00FF, FillStyle(ONE_AT_A_TIME, 150));
+  sectionManager.fillSectionWithColor(6, 0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
+  sectionManager.fillSectionWithColor(7, 0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
+  sectionManager.fillSectionWithColor(8, 0xFF00FF, FillStyle(ONE_AT_A_TIME, 150));
   delay(500);
   FastLED.clear(true);
 
