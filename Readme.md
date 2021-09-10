@@ -4,7 +4,7 @@
 
 The Strip Section Manager is a set of tools used to augment "sections" of an LED strip so that rows of a given "section" are treated like a single row of a normal LED strip.
 
-_See the [](./src/main.cpp) file for detailed examples_
+_See the [main.cpp](./src/main.cpp) file for detailed examples_
 
 ![demo](./readme_attachments/level_by_level_demo.gif)
 &nbsp;
