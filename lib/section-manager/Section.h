@@ -64,6 +64,7 @@ public:
   int *getIndexesAtLevel(int level); // ? keep?
 
   void setColorAtLevel(int levelIndex, uint32_t color);
+  void setColorAtLevel(int levelIndex, uint32_t color, bool showColor);
 
   void fillWithColor(uint32_t color, FillStyle style);
   void fillSectionWithGradient(uint32_t color, FillStyle style);

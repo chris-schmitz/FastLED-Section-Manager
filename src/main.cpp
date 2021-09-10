@@ -42,6 +42,10 @@ void addSectionsAndRanges()
 void setup()
 {
   Serial.begin(9600);
+  // while (!Serial)
+  // {
+  //   ;
+  // }
   Serial.println("Start");
 
   addSectionsAndRanges();
@@ -53,10 +57,13 @@ void setup()
   FastLED.clear(true);
 }
 
+void rainbowAllSections(uint8_t pauseDuration);
+
 void loop()
 {
-  rainbowAllSections(50);
+  rainbowAllSections(0);
   delay(1000);
+  FastLED.clear(true);
 
   for (int i = 0; i < sectionManager.getTotalLevels(); i++)
   {
@@ -100,7 +107,7 @@ void loop()
   sectionManager.getSection(5).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
 
   sectionManager.getSection(6).fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
-  sectionManager.getSection(7).fillWithColor(0x00FFFF, FillStyle(ONE_AT_A_TIME, 150));
+  sectionManager.getSection(7).fillWithColor(0xFFFF00, FillStyle(ONE_AT_A_TIME, 150));
   sectionManager.getSection(8).fillWithColor(0xFF00FF, FillStyle(ONE_AT_A_TIME, 150));
   delay(500);
   FastLED.clear(true);
@@ -118,13 +125,14 @@ void rainbowAllSections(uint8_t pauseDuration)
   {
     for (level = 0; level < sectionManager.getTotalLevels(); level++)
     {
-      uint32_t color = Wheel((level * 20 + wheelPosition) & 255);
 
-      for (uint8_t i = 0; i < sectionManager.getSectionCount(); i++)
+      uint32_t color = Wheel((level * 5 + wheelPosition) & 255);
+
+      for (uint8_t i = 0; i < sectionManager.getTotalLevels(); i++)
       {
         sectionManager.setColorAtGlobalIndex(level, color);
       }
-
+      FastLED.show();
       delay(pauseDuration);
     }
   }
@@ -142,7 +150,7 @@ void rainbowMiddleIn(uint8_t pauseDuration)
       uint32_t color = Wheel((level * 20 + wheelPosition) & 255);
       for (uint8_t i = 0; i < sectionManager.getSectionCount(); i++)
       {
-        sectionManager.getSection(i).setColorAtLevel(level, color);
+        sectionManager.getSection(i).setColorAtLevel(level, color, true);
       }
 
       delay(pauseDuration);

@@ -98,6 +98,10 @@ void Section::_updateLongestRange(uint8_t levelCount)
 
 void Section::setColorAtLevel(int levelIndex, uint32_t color)
 {
+  setColorAtLevel(levelIndex, color, false);
+}
+void Section::setColorAtLevel(int levelIndex, uint32_t color, bool showColor)
+{
   for (int pixelRangeIndex = 0; pixelRangeIndex < getTotalRanges(); pixelRangeIndex++)
   {
     int index = _pixelRanges[pixelRangeIndex].getIndexAtLevel(levelIndex);
@@ -107,7 +111,10 @@ void Section::setColorAtLevel(int levelIndex, uint32_t color)
     }
     _leds[index] = CRGB(color);
   }
-  show();
+  if (showColor)
+  {
+    show();
+  }
 }
 
 void Section::show()
