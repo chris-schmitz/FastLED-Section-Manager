@@ -20,7 +20,7 @@ If a normal led strip had 20 leds in it and you considered 5 leds a section:
 
 The Section Manager could allow you to do something like make the middle "section" two rows:
 
-![double middle row wiring](./readme_attachments/double-middle-row-wiring.png)
+<!-- ![double middle row wiring](./readme_attachments/double-middle-row-wiring.png) -->
 
 And the two rows would be treated as one regular section.
 
