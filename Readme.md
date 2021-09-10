@@ -115,7 +115,11 @@ TODO: add style
 
 ### Middle out
 
+TODO: add style
+
 ### Outsides to middle
+
+TODO: add style
 
 ## Assumptions and restrictions
 
