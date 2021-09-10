@@ -14,16 +14,11 @@ The Strip Section Manager is a set of tools used to augment "sections" of an LED
 
 If a normal led strip had 20 leds in it and you considered 5 leds a section:
 
-```
------ ----- ----- -----
-```
+![inline wiring](./readme_attachments/inline-wiring.png)
 
 The Section Manager could allow you to do something like make the middle "section" two rows:
 
-```
------ ----- -----
-      -----
-```
+![double middle row wiring](./readme_attachments/double-middle-row-wiring.png)
 
 And the two rows would be treated as one regular section.
 
@@ -39,18 +34,43 @@ SectionManager sectionManager = SectionManager(leds);
 
 sectionManager.addSections(3);
 
-sectionManager.getSection(0).addPixelRange(0, 4);
-sectionManager.getSection(1).addPixelRange(5, 9);
-sectionManager.getSection(1).addPixelRange(10, 14);
-sectionManager.getSection(2).addPixelRange(15, 19);
+sectionManager.addRangeToSection(0, 0, 4);
+sectionManager.addRangeToSection(1, 5, 9);
+// Note that because the third led strip (the second range in the second section) is wired
+// in reverse according to the left to right direction of our strip we need to tell the
+// section manager to handle any iteration over this range in reverse. We can send in an
+// optional third boolean value to tell the manager to "reverse" the range.
+sectionManager.addRangeToSection(1, 10, 14, true);
+sectionManager.addRangeToSection(2, 15, 19);
 
-sectionManager.getSection(0).fillWithColor(0xFF0000, FillStyle(ALL_AT_ONCE));
+sectionManager.fillSectionWithColor(0,0xFF0000, FillStyle(ALL_AT_ONCE));
 //  Note that when we fill section 1, it fills all of the ranges at the same time
-sectionManager.getSection(1).fillWithColor(0x00FF00, FillStyle(ALL_AT_ONCE));
-sectionManager.getSection(2).fillWithColor(0x0000FF, FillStyle(ALL_AT_ONCE));
+sectionManager.fillSectionWithColor(1,0x00FF00, FillStyle(ALL_AT_ONCE));
+sectionManager.fillSectionWithColor(2,0x0000FF, FillStyle(ALL_AT_ONCE));
 ```
 
 The leds in the middle section would light up, column by column, as if the color was being set for a single pixel.
+
+![rgb outcome](./readme_attachments/rgb.png)
+
+In addition to setting the color of an entire section at a time you can also iterate over the sections a "level" at a time.
+
+A "level" according to the section manager in our example would be a vertical column of leds:
+
+![levels annotated](./readme_attachments/levels-annotated.png)
+
+To itererate over all levels within the section manager as you would a normal single row led strip you could do something like:
+
+```cpp
+
+for(int level = 0; level < sectionManager.getTotalLevels(); level++) {
+  sectionManager.setColorAtGlobalIndex(level, 0xFF00FF);
+  FastLed.show();
+  delay(100);
+}
+```
+
+The SectionManager is smart enough to send the correct color value to every led in a given level at the same time.
 
 ## Class Structure
 
@@ -65,15 +85,35 @@ The classes in this library each group led index ranges in a hierarchy:
 - SectionManager holds the grouping of all Sections. This is really a convenience class for holding and accessing an array of Sections.
   - You could do the same thing by creating your own array of Sections, the manager just makes iteration a bit cleaner.
 
-<!-- TODO: fill in details including animated gifs -->
-
 ## Fill Styles
+
+When filling an entire section at once, there are a couple of FillStyle configurations to pass in that control how the section is filled in.
+
+At the moment there are only two fill styles, but more styles could be added to the struct in future dev.
 
 ### All at once
 
+```cpp
+  sectionManager.fillSectionWithColor(5, 0x51F0EE, FillStyle(ALL_AT_ONCE));
+```
+
+Using the `ALL_AT_ONCE` fill style will fill all of the LEDs in the given section the same color at the same time.
+
 ### One at a time
 
-### By "level"
+```cpp
+  sectionManager.fillSectionWithColor(0, 0x00FFFF, FillStyle(ONE_AT_A_TIME, 100));
+```
+
+The `ONE_AT_A_TIME` style will fill each level in a section one at a time in ascending order with a delay between levels according to the number value you pass in as the second parameter.
+
+### One at a time reverse
+
+TODO: add style
+
+### Middle out
+
+### Outsides to middle
 
 ## Assumptions and restrictions
 
@@ -96,21 +136,7 @@ Because of that and because I'm trying to keep it simple so I can finish the act
 
 ## To Dos
 
-- Figure out a better name for the concept of "levels"
 - Add in index offsetting per range
-- Add in a way of iterating over all leds for all sections in a single loop
-
-  - Like if you wanted to set each level one by one regardless of sections (but still applying section logic)
-
-  ```c++
-    // something like this
-
-    for (int i = 0; i < sectionManager.totalLevels; i++){
-      sectionManager.setGlobalLevel(i, 0xFF00FF);
-      sectionManager.show();
-      delay(100);
-    }
-  ```
 
 ## POCs
 
