@@ -1,0 +1,23 @@
+{
+  "name": "FastLED SectionManager",
+  "version": "1.0.0",
+  "description": "A led strip index manager that allows for logical groupings of strip sections.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:chris-schmitz/FastLED-Section-Manager.git"
+  },
+  "authors": [
+    {
+      "name": "Christopher Schmitz",
+      "email": "schmitz.chris@gmail.com",
+      "url": "https://light-inspiration.com/"
+    }
+  ],
+  "homepage": "https://github.com/chris-schmitz/FastLED-Section-Manager",
+  "license": "MIT",
+  "dependencies": {
+    "fastled/FastLED": "^3.4.0"
+  },
+  "frameworks": "*",
+  "platforms": "*"
+}
