@@ -86,3 +86,16 @@ void SectionManager::fillSectionWithColor(int sectionIndex, uint32_t color, Fill
 {
   getSection(sectionIndex).fillWithColor(color, style);
 }
+
+void SectionManager::clearAllSections()
+{
+  for (int i = 0; i < getSectionCount(); i++)
+  {
+    clearSection(i);
+  }
+}
+void SectionManager::clearSection(int index)
+{
+  getSection(index).clear();
+  FastLED.show();
+}

@@ -120,3 +120,8 @@ void Section::show()
 {
   FastLED.show();
 }
+
+void Section::clear()
+{
+  fillWithColor(CRGB::Black, FillStyle(ALL_AT_ONCE));
+}

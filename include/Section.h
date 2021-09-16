@@ -70,6 +70,7 @@ public:
   void fillSectionWithGradient(uint32_t color, FillStyle style);
 
   void show();
+  void clear();
 
 private:
   int _rangeCount;

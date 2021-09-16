@@ -1,8 +1,7 @@
-#include "../lib/helpers.h"
-#include "Section.h"
-#include "SectionManager.h"
 #include <Arduino.h>
 #include <FastLED.h>
+#include <SectionManager.h>
+#include <helpers.h>
 
 #define TOTAL_LEDS 42
 #define LED_PIN 3
@@ -42,10 +41,6 @@ void addSectionsAndRanges()
 void setup()
 {
   Serial.begin(9600);
-  // while (!Serial)
-  // {
-  //   ;
-  // }
   Serial.println("Start");
 
   addSectionsAndRanges();

@@ -25,6 +25,9 @@ public:
   void setColorAtGlobalIndex(int globalIndex, uint32_t color);
   void fillSectionWithColor(int sectionIndex, uint32_t color, FillStyle style);
 
+  void clearAllSections();
+  void clearSection(int index);
+
 private:
   CRGB *_leds;
   uint8_t _sectionCount;
