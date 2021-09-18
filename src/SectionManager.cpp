@@ -66,6 +66,12 @@ void SectionManager::setColorAtGlobalIndex(int globalIndex, uint32_t color)
   // sprintf(buffer, "Section: %d, offset: %d, level: %d, color: %d", sectionIndex, relativeOffset, levelIndex, color);
   // Serial.println(buffer);
 
+  // getSection(sectionIndex).setColorAtLevel(levelIndex, color);
+  setColorAtLocalIndex(sectionIndex, levelIndex, color);
+}
+
+void SectionManager::setColorAtLocalIndex(int sectionIndex, int levelIndex, uint32_t color)
+{
   getSection(sectionIndex).setColorAtLevel(levelIndex, color);
 }
 
@@ -83,6 +89,16 @@ Pair<int> SectionManager::_findSectionFromGlobalIndex(int globalIndex)
 }
 
 void SectionManager::fillSectionWithColor(int sectionIndex, uint32_t color, FillStyle style)
+{
+  getSection(sectionIndex).fillWithColor(color, style);
+}
+
+void SectionManager::fillSectionWithColor(int sectionIndex, CRGB color, FillStyle style)
+{
+  getSection(sectionIndex).fillWithColor(color, style);
+}
+
+void SectionManager::fillSectionWithColor(int sectionIndex, CHSV color, FillStyle style)
 {
   getSection(sectionIndex).fillWithColor(color, style);
 }

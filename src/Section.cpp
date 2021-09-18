@@ -58,6 +58,44 @@ int *Section::getIndexesAtLevel(int level)
 
 void Section::fillWithColor(uint32_t color, FillStyle style)
 {
+  fillWithColor(CRGB(color), style);
+}
+
+void Section::fillWithColor(CRGB color, FillStyle style)
+{
+  for (int level = 0; level <= _largestLevelCount; level++)
+  {
+    for (int pixelRangeIndex = 0; pixelRangeIndex < getTotalRanges(); pixelRangeIndex++)
+    {
+      int index = _pixelRanges[pixelRangeIndex].getIndexAtLevel(level);
+      if (index == -1)
+      {
+        return;
+      }
+      Serial.println(color);
+      Serial.println(color, HEX);
+      // char buffer[100];
+      // // sprintf(buffer, " cgrb: %d, %d, %d", color.r, color.g, color.b, );
+      // Serial.println(buffer);
+      _leds[index] = color;
+    }
+    if (style.type == ONE_AT_A_TIME)
+    {
+      show();
+      delay(style.pauseDuration);
+    }
+  }
+  if (style.type == ALL_AT_ONCE)
+  {
+    show();
+  }
+}
+
+// TODO: consider refactor
+// * this and the original fill color are basically the same thing minus type,
+// * it seems like this would be a good place to use a template method
+void Section::fillWithColor(CHSV color, FillStyle style)
+{
   for (int level = 0; level <= _largestLevelCount; level++)
   {
     for (int pixelRangeIndex = 0; pixelRangeIndex < getTotalRanges(); pixelRangeIndex++)
@@ -68,7 +106,7 @@ void Section::fillWithColor(uint32_t color, FillStyle style)
         return;
       }
 
-      _leds[index] = CRGB(color);
+      _leds[index] = color;
     }
     if (style.type == ONE_AT_A_TIME)
     {

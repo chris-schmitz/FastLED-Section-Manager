@@ -67,6 +67,8 @@ public:
   void setColorAtLevel(int levelIndex, uint32_t color, bool showColor);
 
   void fillWithColor(uint32_t color, FillStyle style);
+  void fillWithColor(CRGB color, FillStyle style);
+  void fillWithColor(CHSV color, FillStyle style);
   void fillSectionWithGradient(uint32_t color, FillStyle style);
 
   void show();

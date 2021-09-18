@@ -23,7 +23,10 @@ public:
   int getTotalLevels();
 
   void setColorAtGlobalIndex(int globalIndex, uint32_t color);
+  void setColorAtLocalIndex(int sectionIndex, int levelIndex, uint32_t color);
   void fillSectionWithColor(int sectionIndex, uint32_t color, FillStyle style);
+  void fillSectionWithColor(int sectionIndex, CRGB color, FillStyle style);
+  void fillSectionWithColor(int sectionIndex, CHSV color, FillStyle style);
 
   void clearAllSections();
   void clearSection(int index);
