@@ -7,12 +7,12 @@
 // ? https://github.com/adafruit/Adafruit_NeoPixel/blob/master/examples/strandtest_wheel/strandtest_wheel.ino
 // * I adjusted it here to be more generic -> fastled friendly, but it functions the same
 
-uint32_t rgbToUint32(uint8_t r, uint8_t g, uint8_t b)
+inline uint32_t rgbToUint32(uint8_t r, uint8_t g, uint8_t b)
 {
   return ((uint32_t)r << 16) | ((uint32_t)g << 8) | b;
 }
 
-uint32_t Wheel(uint8_t WheelPosition)
+inline uint32_t Wheel(uint8_t WheelPosition)
 {
   WheelPosition = 255 - WheelPosition;
 

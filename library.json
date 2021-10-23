@@ -1,6 +1,6 @@
 {
   "name": "FastLED-SectionManager",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "A led strip index manager that allows for logical groupings of strip sections.",
   "repository": {
     "type": "git",
